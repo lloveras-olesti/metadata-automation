@@ -1,0 +1,110 @@
+# ============================================================
+# auto-metadata — Client Configuration
+# ============================================================
+# Edit this file for each new client engagement before running
+# the pipeline. All client-specific values live here.
+# API credentials and secret keys go in .env (see .env.example).
+# ============================================================
+
+client:
+  name: "Llibres del Mirall"
+  base_domain: "https://www.llibresdelmirall.com"
+  description: >
+    an antiquarian bookshop specialising in second-hand, antique, and rare books,
+    located in Barcelona, Spain. The shop sells used and collectible books — never new books.
+  # ISO codes used in the site's URLs (order matters: first is the default language)
+  languages:
+    - es
+    - ca
+  # Human-readable language names used in AI prompts
+  language_names:
+    es: "Spanish"
+    ca: "Catalan"
+
+# Brand suffixes appended to titles and meta descriptions
+brand:
+  # Short suffix: appended to title if it fits within title_max
+  suffix_short: " - Llibres del Mirall"
+  # Long suffix: used when title needs padding to reach title_min
+  suffix_long:
+    es: " - Llibres del Mirall, Librería Anticuaria en Barcelona"
+    ca: " - Llibres del Mirall, Llibreria Anticuària a Barcelona"
+
+# Deterministic meta description templates (used as fallback and for product pages)
+# Pattern: {prefix}{category_label}{infix}{brand_suffix}
+meta_templates:
+  prefix:
+    es: "Encuentra los mejores libros de "
+    ca: "Troba els millors llibres de "
+  infix:
+    es: " a la venta online aquí"
+    ca: " a la venda online aquí"
+
+# SEO character length limits
+# Standard defaults (30-60 / 70-155) work for most search engines.
+# Only change if the client has specific requirements.
+seo_limits:
+  title_min: 30
+  title_max: 60
+  meta_min: 70
+  meta_max: 155
+
+# AI model used for title and metadata generation
+# claude-haiku-4-5-20251001  → cost-efficient, good for high-volume runs (~1000+ pages)
+# claude-sonnet-4-6           → higher quality, ~10x cost
+ai:
+  model: "claude-haiku-4-5-20251001"
+
+# Navigation menu parsing (used by build_category_lookup.py)
+# Inspect the client site's HTML source to find the correct element IDs.
+# Steps:
+#   1. Open the site in a browser, right-click the main nav → "Inspect"
+#   2. Find the <ul> element containing category links → copy its id attribute
+#   3. Repeat for the geographic/secondary menu if applicable
+# Set geo_menu_id to null if the site has no geographic navigation.
+menu:
+  category_menu_id: "menu-catalogo"
+  geo_menu_id: "menu-geo"
+  # URL substrings that identify the root "all categories" link (skip it during parsing)
+  # Derive from the menu: the top-level link that leads to the full catalog
+  category_root_skip_patterns:
+    - "catalogo"
+    - "cataleg"
+
+# AI-driven SEO metadata generation (used by generate_category_meta.py)
+seo_generation:
+  # The url_type value identifying "high-priority" pages that get LLM-generated metadata.
+  # Common values: "category", "geo", "brand", "country"
+  # Run the script once per type — change this value between runs if needed.
+  relevant_page_type: "category"
+
+  # Generic keyword pool describing the business.
+  # The AI will pick 1-2 per page — do not force all of them.
+  keyword_pool:
+    es:
+      - "librería anticuaria"
+      - "libros de segunda mano"
+      - "libros de coleccionista"
+      - "libros antiguos"
+      - "librería de viejo"
+    ca:
+      - "llibreria de vell"
+      - "llibres de col·leccionista"
+      - "llibres de segona mà"
+      - "llibres antics"
+      - "llibreria antiquària"
+
+  # Call-to-action phrases for meta descriptions, per language
+  ctas:
+    es:
+      - "encuentra"
+      - "descubre"
+      - "compra online"
+    ca:
+      - "troba"
+      - "descobreix"
+      - "compra en línia"
+
+  # Whether the AI may include the brand name in the meta description.
+  # false = use the character budget for keywords and CTA instead (recommended for ecommerce).
+  include_brand_in_meta_description: false
