@@ -78,7 +78,7 @@ Como el dashboard es un objeto vivo y no un archivo, esta carpeta documenta el p
 | [`methodology.md`](reporting/methodology.md) | Decisiones de construcción: fuentes, conectores, filtrado, períodos de comparación y sus motivos. |
 | [`data-dictionary.md`](reporting/data-dictionary.md) | Definición exacta de cada métrica, dimensión y campo calculado del dashboard. |
 | [`insights.md`](reporting/insights.md) | Interpretación de resultados y análisis de la anomalía de tráfico de febrero. |
-| [`assets/`](reporting/assets/) | Capturas del dashboard (`Medición_Llibres_del_Mirall.pdf`). |
+| [`assets/`](reporting/assets/) | Exportaciones del dashboard en PDF: [`Medición_Llibres_del_Mirall_(Demo_Data).pdf`](reporting/assets/Medición_Llibres_del_Mirall_(Demo_Data).pdf) (informe completo con datos de ejemplo) y [`Medición_Anomalía_Febrero.pdf`](reporting/assets/Medición_Anomalía_Febrero.pdf) (análisis de la anomalía de tráfico con datos reales). |
 
 **Herramientas:** Looker Studio · Google Analytics 4 · Google Search Console.
 
@@ -89,6 +89,8 @@ Como el dashboard es un objeto vivo y no un archivo, esta carpeta documenta el p
 ## Nota sobre los datos del cliente
 
 El proyecto se basa en datos reales de un cliente real. La documentación pública se ha redactado evitando exponer información comercial sensible (contenido específico de la metadata generada, datos de facturación). El foco está deliberadamente puesto en **metodología y criterio**, no en los datos en bruto del cliente.
+
+Los PDFs incluidos en `reporting/assets/` han sido seleccionados con este criterio: el informe general del dashboard utiliza **datos de ejemplo** (mock data) para ilustrar la estructura y las métricas sin exponer cifras reales; el informe de la anomalía de febrero se publica con **datos reales** al tratarse de un análisis técnico sobre tráfico automatizado, sin implicaciones comerciales sensibles.
 
 ---
 
